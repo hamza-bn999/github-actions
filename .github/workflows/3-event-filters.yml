@@ -1,4 +1,20 @@
 name: Event Filters
 on:
+  push:
+    branches:
+      - dev
+      - 'release/*'
+    paths-ignore:
+      - 'docs/**'
 
 jobs:
+  test-filters:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Display branch and event info
+        run: |
+          echo "Event filters working! Triggered on branch: ${{ github.ref_name }}"
+          echo "Event type: ${{ github.event_name }}"
